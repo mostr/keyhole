@@ -1,0 +1,21 @@
+{
+  "name": "keyhole",
+  "version": "0.1.0",
+  "description": "Small utility for projecting only parts of objects, like via keyhole",
+  "main": "lib/keyhole.js",
+
+  "scripts": {
+    "test": "`npm bin`/mocha --compilers js:babel/register",
+    "test-watch": "`npm bin`/mocha --compilers js:babel/register --watch",
+    "build": "scripts/build.sh",
+    "prepublish": "scripts/build.sh"
+  },
+
+  "author": "Michał Ostruszka",
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "^5.6.14",
+    "expect": "^1.6.0",
+    "mocha": "^2.2.5"
+  }
+}
