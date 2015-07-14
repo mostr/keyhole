@@ -37,7 +37,7 @@ const projection = keyhole(source, 'name', 'emails.work', 'colors');
 }
 ```	
 
-For more examples see [tests](tests/) directory
+For more examples see [tests](test/) directory
 
 
 ## Build and test
