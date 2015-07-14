@@ -1,6 +1,6 @@
 # keyhole
 
-Make projections out of your objects, as you'd look at them via keyhole. Define which object properties you want to keep and resulting object will have these properties only (also supports nested properties via dot notation e.g. `foo.bar.baz`). 
+Make projections on your objects, as you'd look at them via keyhole. Define which object properties you want to see and resulting object will have exactly these properties, nothing more (also supports nested properties via dot notation e.g. `foo.bar.baz`). 
 
 ## Installation
 
