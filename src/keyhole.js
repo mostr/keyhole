@@ -1,29 +1,46 @@
-function recursiveGet(source, remainingProps) {
-  if(isUndef(source)) return undefined;
-  const currentProp = remainingProps[0];
-  return (remainingProps.length > 1) 
-    ? recursiveGet(source[currentProp], remainingProps.slice(1))
-    : source[currentProp];
-}
-
-function recursiveSet(target, remainingProps, value) {
-  if(isUndef(value)) return;
-  const currentProp = remainingProps[0];
-  if(remainingProps.length > 1) {
-    if(isUndef(target[currentProp])) target[currentProp] = {};
-    return recursiveSet(target[currentProp], remainingProps.slice(1), value);    
+function recursiveGet(source, propParts) {
+  if(isUndef(source)) {
+    return undefined;
   }
-  target[currentProp] = value;  
+  if(propParts.length == 1) {
+    return source[array.head(propParts)];  
+  }
+  return recursiveGet(source[array.head(propParts)], array.tail(propParts))
 }
 
+function recursiveSet(target, propParts, value) {
+  if(isUndef(value)) {
+    return;
+  }
+  if(propParts.length == 1) {
+    return target[array.head(propParts)] = value;  
+  }
+  if(isUndef(target[array.head(propParts)])) {
+    target[array.head(propParts)] = {};
+  }
+  return recursiveSet(target[array.head(propParts)], array.tail(propParts), value);    
+}
+
+function keyhole(source, ...props) {
+  return props.map(p => p.split('.')).reduce((dest, current) => {
+    recursiveSet(dest, current, recursiveGet(source, current))
+    return dest;
+  }, {});
+
+}
+
+// few tiny array utils
 function isUndef(val) {
   return typeof(val) === 'undefined';
 }
 
-export default function (source, ...props) {
-  var initial = {};
-  return props.map(p => p.split('.')).reduce((dest, current) => {
-    recursiveSet(dest, current, recursiveGet(source, current))
-    return dest;
-  }, initial);
+const array = {
+  head(arr) {
+    return arr[0];
+  },
+  tail(arr) {
+    return arr.slice(1);
+  }
 };
+
+export default keyhole;
