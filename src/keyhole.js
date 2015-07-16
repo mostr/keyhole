@@ -29,10 +29,9 @@ function keyhole(source, ...props) {
 
 }
 
-// few tiny array utils
-function isUndef(val) {
-  return typeof(val) === 'undefined';
-}
+// few tiny utils
+
+const isUndef = (val) => typeof(val) === 'undefined';
 
 const array = {
   head(arr) {
